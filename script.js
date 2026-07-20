@@ -130,10 +130,11 @@ function checkRestaurantOpen(){
     const data = new Date();
     const hora = data.getHours();
     const today = data.getDay();
-    if(today === 0 || 6){
-        return hora >= 9 && hora < 22
+    const isWeekend = today === 0 || today === 6;
+    if(isWeekend){
+        return hora >= 9 && hora < 22;
     }
-    
+    return false;    
     // Se true, restaurante aberto
 }
 
@@ -152,6 +153,8 @@ checkoutBtn.addEventListener("click", function(){
                   background: "#ef4444",
                 },
             }).showToast();
+
+            return;
         }
 
     if(cart.length === 0) return;
