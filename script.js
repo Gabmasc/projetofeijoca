@@ -129,7 +129,11 @@ address.addEventListener("input", function(event){
 function checkRestaurantOpen(){
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 10 && hora < 22
+    const today = data.getDay();
+    if(today === 0 || 6){
+        return hora >= 9 && hora < 22
+    }
+    
     // Se true, restaurante aberto
 }
 
@@ -137,8 +141,18 @@ checkoutBtn.addEventListener("click", function(){
 
     const isOpen = checkRestaurantOpen();
     if(!isOpen){
-        
-    }
+        Toastify({
+                text: "Pedido fora do dia/horário de funcionamento",
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: "#ef4444",
+                },
+            }).showToast();
+        }
 
     if(cart.length === 0) return;
     if(address.value === ""){
