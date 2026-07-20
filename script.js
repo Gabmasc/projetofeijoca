@@ -125,7 +125,21 @@ address.addEventListener("input", function(event){
     }
 })
 
+// Verifica se está em horario de funcionamento
+function checkRestaurantOpen(){
+    const data = new Date();
+    const hora = data.getHours();
+    return hora >= 10 && hora < 22
+    // Se true, restaurante aberto
+}
+
 checkoutBtn.addEventListener("click", function(){
+
+    const isOpen = checkRestaurantOpen();
+    if(!isOpen){
+        
+    }
+
     if(cart.length === 0) return;
     if(address.value === ""){
         addressWarn.classList.remove("hidden")
